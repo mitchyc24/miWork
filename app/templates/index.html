@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block content %}
+<header class="app-header">
+    <h1 class="app-title">miWork</h1>
+    <div class="layout-toggle">
+        <button id="toggle-layout" class="btn-toggle" title="Toggle layout">⬜</button>
+    </div>
+    <nav class="view-tabs">
+        <button class="tab-btn active" data-view="board">Board</button>
+        <button class="tab-btn" data-view="log">Log</button>
+    </nav>
+</header>
+
+<main class="app-main">
+    <section class="panel panel-board" id="board-panel">
+        <div class="board">
+            <div class="board-column" data-status="todo">
+                <div class="column-header">
+                    <h2>To Do</h2>
+                </div>
+                <div class="card-list" id="col-todo"></div>
+                <div class="add-task">
+                    <input type="text" class="add-task-input" placeholder="+ Add task…" data-status="todo">
+                </div>
+            </div>
+            <div class="board-column" data-status="doing">
+                <div class="column-header">
+                    <h2>In Progress</h2>
+                </div>
+                <div class="card-list" id="col-doing"></div>
+                <div class="add-task">
+                    <input type="text" class="add-task-input" placeholder="+ Add task…" data-status="doing">
+                </div>
+            </div>
+            <div class="board-column" data-status="done">
+                <div class="column-header">
+                    <h2>Done</h2>
+                </div>
+                <div class="card-list" id="col-done"></div>
+                <div class="add-task">
+                    <input type="text" class="add-task-input" placeholder="+ Add task…" data-status="done">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="panel panel-log" id="log-panel">
+        <div class="log-toolbar">
+            <div class="tag-filter" id="tag-filter"></div>
+            <div class="log-controls">
+                <input type="text" id="note-search" class="search-input" placeholder="Search notes…">
+                <input type="date" id="note-from" class="date-input">
+                <input type="date" id="note-to" class="date-input">
+                <button id="btn-export" class="btn btn-export">Export</button>
+            </div>
+        </div>
+        <div class="note-input-area">
+            <textarea id="note-body" class="note-textarea" placeholder="Write a note… (use #tags inline)"></textarea>
+            <button id="btn-add-note" class="btn btn-primary">Add note</button>
+        </div>
+        <div class="notes-stream" id="notes-stream">
+            <p class="empty-state">No notes yet — write the first one.</p>
+        </div>
+    </section>
+</main>
+
+<!-- Task edit modal -->
+<div class="modal-overlay" id="task-modal" hidden>
+    <div class="modal">
+        <h3>Edit Task</h3>
+        <input type="text" id="modal-task-title" class="modal-input" placeholder="Title">
+        <textarea id="modal-task-desc" class="modal-textarea" placeholder="Description (optional)"></textarea>
+        <input type="text" id="modal-task-tags" class="modal-input" placeholder="Tags (comma separated)">
+        <div class="modal-actions">
+            <button id="modal-save" class="btn btn-primary">Save</button>
+            <button id="modal-delete" class="btn btn-danger">Delete</button>
+            <button id="modal-cancel" class="btn">Cancel</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/api.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tags.js') }}"></script>
+<script src="{{ url_for('static', filename='js/board.js') }}"></script>
+<script src="{{ url_for('static', filename='js/notes.js') }}"></script>
+{% endblock %}
