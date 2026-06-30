@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, make_response
 
 from ..models import tasks, notes
 from ..models.tags import get_all_tags
@@ -168,7 +168,6 @@ def export_notes():
     content = "\n".join(lines)
     today = datetime.utcnow().strftime('%Y%m%d')
 
-    from flask import make_response
     response = make_response(content)
     response.headers['Content-Type'] = 'text/plain; charset=utf-8'
     response.headers['Content-Disposition'] = f'attachment; filename="notes-{today}.txt"'

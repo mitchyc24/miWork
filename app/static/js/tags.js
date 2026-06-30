@@ -52,6 +52,6 @@ const Tags = {
             tags.push(name);
             return '';
         }).trim();
-        return { body: body || text, tags: tags.length ? tags : null };
+        return { body: body.length ? body : text, tags: tags.length ? tags : null };
     }
 };

@@ -177,7 +177,7 @@ const Layout = {
                 main.classList.remove('tabbed');
             }
         };
-        mq.addListener(handleWidth);
+        mq.addEventListener('change', handleWidth);
         handleWidth(mq);
     }
 };
